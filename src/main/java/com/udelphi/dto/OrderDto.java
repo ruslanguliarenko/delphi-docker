@@ -2,31 +2,39 @@ package com.udelphi.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.sql.Date;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @ApiModel(description = "All details about the order.")
 public class OrderDto extends AuditableDto{
     @ApiModelProperty(notes = "The database generated order ID")
     private Integer id;
     @ApiModelProperty(notes = "Date when created order")
     private Date orderDate;
+    @JsonIgnoreProperties(value = {"order", "product", "quantity",
+            "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
     @ApiModelProperty(notes = "List order items")
     private Set<OrderItemDto> orderItems = new HashSet<>();
     @ApiModelProperty(notes = "Id client who make order")
-    private Integer clientId;
+    private UserDto client;
 
     public OrderDto() {
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public UserDto getClient() {
+        return client;
     }
 
-    public OrderDto setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public OrderDto setClient(UserDto client) {
+        this.client = client;
         return this;
     }
 

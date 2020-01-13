@@ -24,26 +24,23 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
-    private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository,
                            RoleRepository roleRepository, OrderRepository orderRepository,
-                           ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+                           ModelMapper modelMapper) {
 
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.roleRepository = roleRepository;
         this.orderRepository = orderRepository;
         this.modelMapper = modelMapper;
-        this.passwordEncoder = passwordEncoder;
     }
 
 
     public UserDto saveUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         User savedUser = userRepository.save(user);
+
         return modelMapper.map(savedUser, UserDto.class);
     }
 
@@ -52,7 +49,6 @@ public class UserServiceImpl implements UserService {
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));
     }
-
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
                 .stream()
@@ -101,7 +97,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with email: " + email));
     }
 
-    @PreAuthorize("#id == authentication.principal.id")
     public void deleteUserRole(int id, int roleId) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));

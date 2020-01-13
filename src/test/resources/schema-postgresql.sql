@@ -17,7 +17,7 @@ create table  users
     email varchar(255) unique,
     password varchar(255) ,
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -34,7 +34,7 @@ create table categories
     id   serial,
     name varchar(255),
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -53,7 +53,7 @@ create table products
     description varchar(255),
     price decimal,
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -70,7 +70,7 @@ create table  product_category
     product_id  int,
     category_id int ,
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -91,7 +91,7 @@ create table  roles
     id   serial,
     name varchar(255),
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -110,7 +110,7 @@ create table user_role
     user_id int,
     role_id int,
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -134,7 +134,7 @@ create table comments
     product_id int ,
     comment_id int,
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -158,7 +158,7 @@ create table orders
     order_date date,
     client_id int,
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 
@@ -179,7 +179,7 @@ create table  order_items
     product_id int,
     quantity   int not null,
     created_by varchar(255),
-    creation_date timestamp,
+    created_date timestamp,
     last_modified_by varchar(255),
     last_modified_date timestamp,
 

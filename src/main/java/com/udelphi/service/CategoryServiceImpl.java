@@ -8,6 +8,7 @@ import com.udelphi.repository.CategoryRepository;
 import static java.util.stream.Collectors.toList;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {

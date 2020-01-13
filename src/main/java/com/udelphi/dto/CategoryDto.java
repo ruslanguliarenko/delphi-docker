@@ -1,9 +1,13 @@
 package com.udelphi.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @ApiModel(description = "All details about the category.")
 public class CategoryDto extends AuditableDto {
 

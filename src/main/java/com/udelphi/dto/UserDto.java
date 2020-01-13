@@ -2,9 +2,15 @@ package com.udelphi.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @ApiModel(description = "All details about the user.")
 public class UserDto  extends  AuditableDto{
     @ApiModelProperty(notes = "The database generated user ID")
@@ -15,10 +21,16 @@ public class UserDto  extends  AuditableDto{
     private String email;
     @ApiModelProperty(notes = "User password")
     private String password;
+    @JsonIgnoreProperties(value = {"name",
+            "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
     @ApiModelProperty(notes = "Roles that have a user")
     private Set<RoleDto> roles = new HashSet<>();
+    @JsonIgnoreProperties(value = {"text", "user", "product", "comments", "comment",
+            "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
     @ApiModelProperty(notes = "Comments that have a user")
     private Set<CommentDto> comments = new HashSet<>();
+    @JsonIgnoreProperties(value = {"orderDate", "client", "orderItems",
+            "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
     @ApiModelProperty(notes = "Orders that have a user")
     private Set<OrderDto> orders = new HashSet<>();
 

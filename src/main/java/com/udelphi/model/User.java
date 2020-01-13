@@ -1,9 +1,7 @@
 package com.udelphi.model;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-
 import com.udelphi.model.audit.Auditable;
 import org.hibernate.annotations.NaturalId;
 
@@ -20,21 +18,25 @@ public class User extends Auditable{
     @NaturalId
     @Column(name = "email")
     private String email;
-
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "userId")
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "client_id")
+    @OneToMany(mappedBy = "client",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 
     public User() {

@@ -2,7 +2,6 @@ package com.udelphi.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.udelphi.model.audit.Auditable;
 
 import javax.persistence.*;
@@ -20,11 +19,12 @@ public class Order extends Auditable {
     private Date orderDate;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", nullable = false)
     private Set<OrderItem> orderItems = new HashSet<>();
 
-    @Column(name = "client_id")
-    private Integer clientId;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "client_id", nullable = false)
+    private User client;
 
     public Order() {
     }
@@ -33,12 +33,12 @@ public class Order extends Auditable {
         orderItems.add(orderItem);
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public User getClient() {
+        return client;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setClient(User client) {
+        this.client = client;
     }
 
     public Integer getId() {

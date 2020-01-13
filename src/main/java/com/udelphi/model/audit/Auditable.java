@@ -19,8 +19,8 @@ public abstract class Auditable {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "creation_date", updatable = false)
-    protected Date creationDate;
+    @Column(name = "created_date", updatable = false)
+    protected Date createdDate;
 
     @LastModifiedBy
     protected String lastModifiedBy;
@@ -37,12 +37,12 @@ public abstract class Auditable {
         this.createdBy = createdBy;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getLastModifiedBy() {

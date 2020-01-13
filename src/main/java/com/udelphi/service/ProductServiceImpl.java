@@ -14,6 +14,7 @@ import com.udelphi.repository.ProductRepository;
 import static java.util.stream.Collectors.toList;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductServiceImpl implements ProductService {

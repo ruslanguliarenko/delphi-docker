@@ -2,7 +2,6 @@ package com.udelphi.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.udelphi.model.audit.Auditable;
 
 import javax.persistence.*;
@@ -27,17 +26,17 @@ public class Product extends Auditable{
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "product_category",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+            joinColumns = @JoinColumn(name = "product_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "category_id", nullable = false))
     private Set<Category> categories = new HashSet<>();
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
+    @OneToMany(mappedBy = "product",
+            fetch = FetchType.EAGER)
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
+    @OneToMany(mappedBy = "product",
+            fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     public Product() {

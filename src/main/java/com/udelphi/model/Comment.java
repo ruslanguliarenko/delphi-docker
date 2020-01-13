@@ -1,14 +1,13 @@
 package com.udelphi.model;
 
 import java.util.Set;
-
 import com.udelphi.model.audit.Auditable;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "comments")
-public class Comment extends Auditable{
+public class Comment extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -17,37 +16,53 @@ public class Comment extends Auditable{
     @Column(name = "text")
     private String text;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "product_id")
-    private Integer productId;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "comment_id")
+    @OneToMany(mappedBy = "comment",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     private Set<Comment> comments;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
+
     public Comment() {
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 
     public void addComment(Comment comment) {
         comments.add(comment);
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getProductId() {
-        return productId;
+
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Set<Comment> getComments() {

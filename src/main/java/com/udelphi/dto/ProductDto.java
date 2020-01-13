@@ -2,9 +2,15 @@ package com.udelphi.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @ApiModel(description = "All details about the product.")
 public class ProductDto extends AuditableDto{
     @ApiModelProperty(notes = "The database generated product ID")
@@ -16,9 +22,15 @@ public class ProductDto extends AuditableDto{
     @ApiModelProperty(notes = "Product price")
     private double price;
     @ApiModelProperty(notes = "Categories that have a product")
+    @JsonIgnoreProperties(value = {"name",
+            "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
     private Set<CategoryDto> categories = new HashSet<>();
+    @JsonIgnoreProperties(value = {"text", "user", "product", "comments", "comment",
+            "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
     @ApiModelProperty(notes = "Comment that have a product")
     private Set<CommentDto> comments = new HashSet<>();
+    @JsonIgnoreProperties(value = {"order", "product", "quantity",
+            "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
     @ApiModelProperty(notes = "Order items that have a product")
     private Set<OrderItemDto> orderItems = new HashSet<>();
 

@@ -16,29 +16,31 @@ public class OrderItem extends Auditable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "product_id")
-    private Integer productId;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
-    @Column(name = "order_id")
-    private Integer orderId;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "order_id", nullable = false, insertable = false, updatable = false)
+    private Order order;
 
     public OrderItem() {
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Integer getQuantity() {

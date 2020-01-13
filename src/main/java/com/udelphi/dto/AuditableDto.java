@@ -8,7 +8,7 @@ public class AuditableDto {
 
     protected String createdBy;
 
-    protected Date creationDate;
+    protected Date createdDate;
 
     protected String lastModifiedBy;
 
@@ -23,12 +23,12 @@ public class AuditableDto {
         return this;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public AuditableDto setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public AuditableDto setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
         return this;
     }
 
